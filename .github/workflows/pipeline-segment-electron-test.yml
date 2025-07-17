@@ -58,6 +58,9 @@ jobs:
       TARGET_ARCH: ${{ inputs.target-arch }}
       ARTIFACT_KEY: ${{ matrix.build-type }}_${{ inputs.target-arch }}
     steps:
+    - name: Setup SSH Debugging
+      if: ${{ inputs.target-platform == 'macos' }}
+      uses: ./src/electron/.github/actions/ssh-debug
     - name: Fix node20 on arm32 runners
       if: ${{ inputs.target-arch == 'arm' && inputs.target-platform == 'linux' }}
       run: |

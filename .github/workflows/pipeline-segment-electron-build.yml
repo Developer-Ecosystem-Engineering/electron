@@ -94,6 +94,9 @@ jobs:
         path: src/electron
         fetch-depth: 0
         ref: ${{ github.event.pull_request.head.sha }}
+    - name: Setup SSH Debugging
+      if: ${{ inputs.target-platform == 'macos' }}
+      uses: ./src/electron/.github/actions/ssh-debug
     - name: Free up space (macOS)
       if: ${{ inputs.target-platform == 'macos' }}
       uses: ./src/electron/.github/actions/free-space-macos
